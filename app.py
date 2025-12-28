@@ -40,11 +40,11 @@ plt.title("Recency vs. Monetary (Filtered)")
 st.pyplot(fig)
 
 # --- LOOKUP TOOL ---
-# --- LOOKUP TOOL ---
+
 st.markdown("---")
 st.subheader("🔍 Individual Customer Lookup")
 
-# OPTION 1: Create a list of all IDs to show in the dropdown
+
 customer_ids = df.index.tolist()
 
 # The Magic Dropdown (Searchable)
@@ -54,7 +54,7 @@ selected_customer_id = st.selectbox(
 )
 
 if st.button("Generate Strategy"):
-    # No need for try/except anymore because the ID is guaranteed to exist!
+
     customer = df.loc[selected_customer_id]
     segment = customer['Segment']
     
