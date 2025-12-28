@@ -40,27 +40,34 @@ plt.title("Recency vs. Monetary (Filtered)")
 st.pyplot(fig)
 
 # --- LOOKUP TOOL ---
+# --- LOOKUP TOOL ---
 st.markdown("---")
 st.subheader("🔍 Individual Customer Lookup")
-customer_id_input = st.number_input("Enter Customer ID:", min_value=0.0, step=1.0)
+
+# OPTION 1: Create a list of all IDs to show in the dropdown
+customer_ids = df.index.tolist()
+
+# The Magic Dropdown (Searchable)
+selected_customer_id = st.selectbox(
+    "Select a Customer ID to view their profile:",
+    options=customer_ids
+)
 
 if st.button("Generate Strategy"):
-    try:
-        customer = df.loc[customer_id_input]
-        segment = customer['Segment']
-        st.success(f"Customer Found! Segment: **{segment}**")
-
-        c1, c2, c3 = st.columns(3)
-        c1.write(f"**Last Seen:** {customer['Recency']:.0f} days ago")
-        c2.write(f"**Frequency:** {customer['Frequency']:.0f} orders")
-        c3.write(f"**Total Spent:** £{customer['Monetary']:.2f}")
-
-        if segment == 'VIP':
-            st.info("🌟 **Action:** Send personal Thank You note. Offer early access.")
-        elif segment == 'Potential Loyalist':
-            st.warning("📈 **Action:** Upsell. Offer a 'Spend £50 get Free Shipping' coupon.")
-        elif segment == 'Lost':
-            st.error("💤 **Action:** Re-activate. Send 'We Miss You' email with 10% discount.")
-
-    except KeyError:
-        st.error(f"Customer ID {customer_id_input} not found in database.")
+    # No need for try/except anymore because the ID is guaranteed to exist!
+    customer = df.loc[selected_customer_id]
+    segment = customer['Segment']
+    
+    st.success(f"Customer Found! Segment: **{segment}**")
+    
+    c1, c2, c3 = st.columns(3)
+    c1.write(f"**Last Seen:** {customer['Recency']:.0f} days ago")
+    c2.write(f"**Frequency:** {customer['Frequency']:.0f} orders")
+    c3.write(f"**Total Spent:** £{customer['Monetary']:.2f}")
+    
+    if segment == 'VIP':
+        st.info("🌟 **Action:** Send personal Thank You note. Offer early access.")
+    elif segment == 'Potential Loyalist':
+        st.warning("📈 **Action:** Upsell. Offer a 'Spend £50 get Free Shipping' coupon.")
+    elif segment == 'Lost':
+        st.error("💤 **Action:** Re-activate. Send 'We Miss You' email with 10% discount.")
