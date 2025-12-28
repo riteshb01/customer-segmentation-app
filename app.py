@@ -1,3 +1,4 @@
+%%writefile app.py
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -9,7 +10,6 @@ st.markdown("Use this dashboard to analyze customer behavior and get AI-driven m
 
 @st.cache_data
 def load_data():
-    # We use the file you generated earlier
     data = pd.read_csv('rfm_final_labeled.csv', index_col=0)
     return data
 
