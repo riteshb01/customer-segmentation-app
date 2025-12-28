@@ -1,6 +1,6 @@
 # 🛒 AI-Driven Customer Segmentation Engine
 
-### 🚀 **Live Demo:** [INSERT YOUR STREAMLIT APP LINK HERE]
+### 🚀 **Live Demo:** https://riteshbastola.streamlit.app/
 
 ## 📌 Project Overview
 In the highly competitive retail landscape, treating every customer the same is a recipe for inefficiency. This project solves that problem by building an **Unsupervised Machine Learning pipeline** to segment customers based on their purchasing behavior. 
